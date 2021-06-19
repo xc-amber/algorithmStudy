@@ -8,29 +8,29 @@ public class Solution350 {
         HashMap<Integer, Integer> map = new HashMap<>();
         ArrayList<Integer> list = new ArrayList<>();
         if(len1 <= len2){
-            for (int j : nums2) {
-                map.put(j, map.getOrDefault(j, 0) + 1);
+            for (int num : nums2) {
+                map.put(num, map.getOrDefault(num, 0) + 1);
             }
-            for (int j : nums1) {
-                if (map.get(j) != null) {
-                    list.add(j);
-                    map.put(j, map.get(j) - 1);
-                    if (map.get(j) == 0) {
-                        map.remove(j);
+            for (int num : nums1) {
+                if (map.get(num) != null) {
+                    list.add(num);
+                    map.put(num, map.get(num) - 1);
+                    if (map.get(num) == 0) {
+                        map.remove(num);
                     }
                 }
             }
         }
         if(len1 > len2){
-            for (int j : nums1) {
-                map.put(j, map.getOrDefault(j, 0) + 1);
+            for (int num : nums1) {
+                map.put(num, map.getOrDefault(num, 0) + 1);
             }
-            for (int j : nums2) {
-                if (map.get(j) != null) {
-                    list.add(j);
-                    map.put(j, map.get(j) - 1);
-                    if (map.get(j) == 0) {
-                        map.remove(j);
+            for (int num : nums2) {
+                if (map.get(num) != null) {
+                    list.add(num);
+                    map.put(num, map.get(num) - 1);
+                    if (map.get(num) == 0) {
+                        map.remove(num);
                     }
                 }
             }
