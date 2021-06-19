@@ -4,9 +4,14 @@
 * 时间复杂度分析：需要循环k次，每次循环需要遍历数组所有元素，所以时间复杂度O(k*n)，n为数组长度；
 * 空间复杂度分析：O(1);
 * 该方法运行超时；
+* 由方法2分析令k %= length处理
 * 代码如下：
 *     public void rotate(int[] nums, int k) {
         int len = nums.length;
+        k %= len;
+        if(k == 0){
+            return;
+        }
         for (int i = 1; i <= k; i++) {
             int temp = nums[len - 1];
             for (int j = len - 1; j > 0; j--) {
@@ -22,7 +27,7 @@
 * 再从原数组的nums[0]遍历到nums[length - k - 1];依次赋值给numsNew[k]d到numsNew[length - 1];
 * 该方法遇到测试用例k大于nums的长度时，就会有数组越界的问题；k大于length时，相当于已经旋转超过一轮了
 * 由超过一轮这个想法发现如果k == length的话，相当于没有翻转，直接返回就行
-* 所以如果k> length的话，只要令k = k % length再处理就行
+* 所以如果k> length的话，只要令k %= length再处理就行
 * 时间复杂度分析:遍历一次数组长度，O(n) n为数组长度；
 * 空间复杂度分析：新建了一个数组，O(n)；
 * 代码如下：
