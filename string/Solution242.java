@@ -113,17 +113,8 @@ public class Solution242 {
         if(len1 != len2){
             return false;
         }
-        int[] arr = new int[26];
-        for (char value : sArr) {
-            arr[value - 'a']++;
-        }
-        for (char value : tArr) {
-            if(arr[value - 'a'] == 0 ){
-                return false;
-            }
-            arr[value - 'a']--;
-        }
-        return true;
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
+        return Arrays.equals(sArr, tArr);
     }
-
 }
