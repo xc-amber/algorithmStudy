@@ -62,6 +62,7 @@ import java.util.HashMap;
         return map.size() == 0;
     }
 *
+* 继续优化：
 * 对于以上解法只需要1个map直接操作key和value，那是不是没必要用map，想到用数组优化
 * new int[26];数组长度为26，是因为最多只有26个小写字母
 *代码如下：
