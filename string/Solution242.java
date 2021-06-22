@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class Solution242 {
-    public static boolean isAnagram(String s, String t) {
+    public boolean isAnagram(String s, String t) {
         char[] sArr = s.toCharArray();
         char[] tArr = t.toCharArray();
         HashMap<Character, Integer> map1 = new HashMap<>();
@@ -23,7 +23,4 @@ public class Solution242 {
         return true;
     }
 
-    public static void main(String[] args) {
-        isAnagram("aa", "a");
-    }
 }
