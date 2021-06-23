@@ -1,6 +1,9 @@
 public class Solution8 {
     public int myAtoi(String s) {
         int len = s.length();
+        if(len < 1){
+            return 0;
+        }
         int res = 0;
         int index = 0;
         boolean flag = true;
@@ -20,38 +23,26 @@ public class Solution8 {
             }
             if(s.charAt(index) == '-'){
                 flag = false;
-                res = myAtoiDigital(s.substring(index + 1));
+                res = myAtoiDigital(s.substring(index + 1), flag);
                 break;
             }
             if(s.charAt(index) == '+'){
-              res = myAtoiDigital(s.substring(index + 1));
+              res = myAtoiDigital(s.substring(index + 1), flag);
                 break;
             }
             if (Character.isDigit(s.charAt(index))){
-                res = myAtoiDigital(s.substring(index));
+                res = myAtoiDigital(s.substring(index), flag);
                 break;
             }
         }
-        if(flag){
-            return res;
-        }else{
-            if(res == Integer.MAX_VALUE){
-                return Integer.MIN_VALUE;
-            }else{
-                return -res;
-            }
-        }
+        return res;
     }
-    public int myAtoiDigital(String s){
-        System.out.println(s);
-        int res = 0;
+    public int myAtoiDigital(String s, boolean flag){
+        long res = 0;
         int len = s.length();
         int index = 0;
         while (index < len){
             if(Character.isDigit(s.charAt(index))){
-                if((res * 10) / 10 != res ){
-                    return  Integer.MAX_VALUE;
-                }
                 String str = String.valueOf(s.charAt(index));
                 int temp = Integer.parseInt(str);
                 res = res * 10 + temp;
@@ -60,12 +51,23 @@ public class Solution8 {
             }
             index++;
         }
-        System.out.println(res);
-        return res;
+        if(flag){
+            if(res > Integer.MAX_VALUE){
+                return Integer.MAX_VALUE;
+            }else {
+                return ((int) res);
+            }
+        }else{
+            if(-res < Integer.MIN_VALUE){
+                return Integer.MIN_VALUE;
+            }else {
+                return ((int) - res);
+            }
+        }
     }
 
     public static void main(String[] args) {
         Solution8 solution8 = new Solution8();
-        solution8.myAtoi(".1");
+        solution8.myAtoi("2147483648");
     }
 }
