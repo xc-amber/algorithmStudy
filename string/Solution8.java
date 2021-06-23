@@ -7,15 +7,6 @@ public class Solution8 {
         int res = 0;
         int index = 0;
         boolean flag = true;
-
-        if(!Character.isDigit(s.charAt(0))){
-            if(Character.isLetter(s.charAt(0))){
-                return 0;
-            }
-            if(s.charAt(0) != ' ' && s.charAt(0) != '+' && s.charAt(0) != '-'){
-                return 0;
-            }
-        }
         while (index < len){
             if(s.charAt(index) == ' '){
                 index++;
@@ -32,11 +23,8 @@ public class Solution8 {
             }
             if (Character.isDigit(s.charAt(index))){
                 res = myAtoiDigital(s.substring(index), flag);
-                break;
             }
-            if (Character.isLetter(s.charAt(index))){
-                break;
-            }
+            break;
         }
         return res;
     }
