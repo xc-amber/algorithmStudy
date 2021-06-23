@@ -34,10 +34,14 @@ public class Solution8 {
                 res = myAtoiDigital(s.substring(index), flag);
                 break;
             }
+            if (Character.isLetter(s.charAt(index))){
+                break;
+            }
         }
         return res;
     }
     public int myAtoiDigital(String s, boolean flag){
+        System.out.println(s);
         long res = 0;
         int len = s.length();
         int index = 0;
@@ -46,28 +50,26 @@ public class Solution8 {
                 String str = String.valueOf(s.charAt(index));
                 int temp = Integer.parseInt(str);
                 res = res * 10 + temp;
+                if(flag){
+                    if(res > Integer.MAX_VALUE){
+                        return Integer.MAX_VALUE;
+                    }
+                }else{
+                    if(-res < Integer.MIN_VALUE){
+                        return Integer.MIN_VALUE;
+                    }
+                }
+
             }else{
                 break;
             }
             index++;
         }
-        if(flag){
-            if(res > Integer.MAX_VALUE){
-                return Integer.MAX_VALUE;
-            }else {
-                return ((int) res);
-            }
-        }else{
-            if(-res < Integer.MIN_VALUE){
-                return Integer.MIN_VALUE;
-            }else {
-                return ((int) - res);
-            }
-        }
+        return flag ? ((int) res) : ((int) - res);
     }
 
     public static void main(String[] args) {
         Solution8 solution8 = new Solution8();
-        solution8.myAtoi("2147483648");
+        solution8.myAtoi(" b11228552307");
     }
 }
