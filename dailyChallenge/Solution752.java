@@ -131,11 +131,12 @@ import java.util.Queue;
 //                如果还没找到终点，就将该节点的所有相邻点加入q1;
                 for(相邻点 : node的所有相邻点){
                     if(!visited.contains(相邻点)){
-                        q1.add(相邻点)；
+                        temp.add(相邻点)；
                     }
                 }
             }
             step++; //别忘记增加步数
+            q1 = temp; //将temp变为q1；因为接下来要搜索temp里的节点；
         }
         return 找不到;
     }
@@ -167,12 +168,17 @@ public class Solution752 {
                 visited.add(s);
                 for (int i = 0; i < 4; i++) {
                     String plus = puls(s, i);
-                    q1.add(plus);
+                    if(!visited.contains(plus)){
+                        temp.add(plus);
+                    }
                     String minus = minus(s, i);
-                    q1.add(minus);
+                    if(!visited.contains(minus)){
+                        temp.add(minus);
+                    }
                 }
             }
             step++;
+            q1 = temp;
         }
         return -1;
     }
@@ -193,10 +199,5 @@ public class Solution752 {
             ch[i] -= 1;
         }
         return new String(ch);
-    }
-
-    public static void main(String[] args) {
-        Solution752 solution752 = new Solution752();
-        solution752.openLock(new String[]{"0201","0101","0102","1212","2002"}, "0202");
     }
 }
