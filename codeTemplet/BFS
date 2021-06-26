@@ -1,0 +1,83 @@
+  1、BFS使用场景：求最短路径类问题，看到求最少次数，求最短路径之类的问题要立马想到BFS
+
+
+
+  一、标准BFS
+  1、BFS算法思维核心就是遍历图，把起始节点放入queue中，再从queue中依次取出节点，每次将被取出节点的相邻节点再加入queue中；
+     当找到结果时return
+  2、标准BFS代码框架：
+    public int BFS(){
+        Queue<Node> queue = new LinkedList<>();   //核心数据结构，队列
+        HashSet<Node> visitedSet = new HashSet<>();  //记录已经被加入过queue的节点，防止走回头路
+        queue.add(起始点);    //将起始点添加到queue中
+        int step = 0;    //记录步数
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Node node = queue.poll();
+//                判断是否找到终点，找到就返回步数
+                if(node is target){
+                    return step;
+                }
+//                如果不是终点，就将node的所有相邻点加入queue
+                for(相邻点 : node的所有相邻点){
+                    queue.offer(相邻点)；
+//                    别忘了也要加入visitedSet
+                    visitedSet.add(相邻点);
+                }
+            }
+            step++;
+        }
+        return 未找到;
+    }
+
+    二、双向BFS
+    1、当知道起点和终点的时候应该立即想到双向BFS来优化搜索次数
+    2、双向BFS为什么能优化搜索次数？虽然从时间复杂度上来分析，标准BFS和双向BFS的时间复杂度都是O(n),n为所有与元素的个数；
+       但是以二叉树举例：标准BFS每搜索一次都会向外扩散找到邻居，搜索空间取决于每层的最大宽度，很容易造成空间爆炸；所以如果
+       同时从两个方向开始搜索，一旦搜索到相同的值，意味着找到了一条联通起点和终点的最短路径；对于「有解」、「有一定数据范围」
+       同时「层级节点数量以倍数或者指数级别增长」的情况，「双向 BFS」的搜索空间通常只有「标准 BFS」的空间消耗的几百分之一，
+       甚至几千分之一。
+     3、双向BFS代码框架：
+         public int bidirectionalBFS(){
+     //        双向遍历用集合不用队列，主要是因为集合可以快速判断元素是否存在，也就是方便判断双向BFS是否有交点了
+             HashSet<Node> q1 = new HashSet<>();
+             HashSet<Node> q2 = new HashSet<>();
+     //        访问过的节点
+             HashSet<Node> visited = new HashSet<>();
+     //        q1.add(起点)
+             q1.add(start);
+     //        q2.add(终点)
+             q2.add(target);
+             int step = 0;    //记录步数
+             while (!q1.isEmpty() && !q2.isEmpty()){
+     //            先搜索元素少的集合
+                 if(q1.size() > q2.size()){
+                     HashSet<Node> tempForSwap = q1;
+                     q1 = q2;
+                     q2 = tempForSwap;
+                 }
+     //            temp存储q1中搜索到的元素相邻的节点
+                 HashSet<Node> temp = new HashSet<>();
+     //            搜索q1中所有的节点进行扩散
+                 for(cur : q1){
+     //                判断是否达到终点，也就是双向BFS是否产生了交点
+                     if(q2.contains(cur)){
+                         return step;
+                     }
+     //                记录已经搜索过的节点
+                     visited.add(cur);
+     //                如果还没找到终点，就将该节点的所有相邻点加入q1;
+                     for(相邻点 : node的所有相邻点){
+                         if(!visited.contains(相邻点)){
+                             temp.add(相邻点)；
+                         }
+                     }
+                 }
+                 step++; //别忘记增加步数
+                 q1 = temp; //将temp变为q1；因为接下来要搜索temp里的节点；
+             }
+             return 找不到;
+         }
+
+
