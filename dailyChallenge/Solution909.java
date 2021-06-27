@@ -1,7 +1,15 @@
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
-
+/*
+* 方法1：BFS+二维数组
+* 从左下角1开始扩散，每次扩散[queue.poll + 1, queue.poll + 6];得到扩散后的值后需要判断在该值是否有梯子
+* 根据board的行列数，可以还原出realBoard，记录数字1~row*column
+* 再写出根据值取i和j的方法
+* 这样我们就能很简单在realBoard中找出扩散后数字的索引，再在board中找到改索引位置是否为-1
+* 时间复杂度分析：还原出realBoard  O(n*n)，getX/getY为O(1)，BFS O(n*n)，所以整体时间复杂度O(n*n)
+* 空间复杂度分析：O(n*n)
+* */
 public class Solution909 {
     public int snakesAndLadders(int[][] board) {
         int row = board.length;
