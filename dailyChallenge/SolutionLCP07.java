@@ -96,7 +96,7 @@ public class SolutionLCP07 {
         int num = 0;
         int target;
         int k;
-        List[] temp;
+        List<Integer>[] temp;
         public int numWays(int n, int[][] relation, int k) {
             this.target = n - 1;
             this.k = k;
