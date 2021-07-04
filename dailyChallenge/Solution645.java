@@ -33,6 +33,28 @@ import java.util.HashMap;
 * 再从1到n,在数组中进行二分搜索，搜不到的数即为修改后的数字
 * 时间复杂度分析：sort排序O(nlogn),找相邻位置数字相等O(n),从1到n,在数组中进行二分搜索O(n*logn),所以总的复杂度为O(nlogn + n)
 * 空间复杂度分析：sort排序需要的额外空间O(logn)
+* 代码如下：
+* public class Solution645 {
+    public int[] findErrorNums(int[] nums) {
+        int[] res = new int[2];
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            if(nums[i] == nums[i - 1]){
+                res[0] = nums[i];
+                break;
+            }
+        }
+        for (int i = 1; i <= nums.length ; i++) {
+            if(Arrays.binarySearch(nums, i) < 0){
+                res[1] = i;
+                break;
+            }
+        }
+        return res;
+    }
+}
+*
+*
 *
 * */
 
