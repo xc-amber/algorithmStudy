@@ -62,6 +62,7 @@ import java.util.Map;
 * 3、在后续遍历遇到已经在map中存在的节点，就证明这个节点肯定在之前是某个节点的random指向的，在之前就被添加了；所以直接跳过添加步骤即可，直接维护next指针和random指针的关系就行
 * 时间复杂度分析：一次遍历原链表：O(n)
 * 空间复杂度分析：一样是两个map：O(n)
+*
 * */
 
 public class Solution138 {
