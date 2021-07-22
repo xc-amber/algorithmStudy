@@ -1,0 +1,43 @@
+LRU缓存淘汰算法代码框架
+
+1、核心数据结构为Map+双向链表；可以直接用java现成的数据结构LinkedHashMap;
+class LRUCache {
+    //LinkedHashMap记录cache，越靠近链表尾部的为越近使用过的cache
+    LinkedHashMap<Integer, Integer> map;
+    int cap;
+    public LRUCache(int capacity) {
+        map = new LinkedHashMap<>();
+        this.cap = capacity;
+    }
+
+    public int get(int key) {
+        //如果找不到key返回-1
+        if(!map.containsKey(key)){
+            return -1;
+        }
+        //因为get操作，该key就变为最近一次使用的key了，所以将它添加到LinkedHashMap的末尾
+        makeRecently(key);
+        return map.get(key);
+    }
+
+    public void put(int key, int value) {
+        //如果要put的cache的key在map中存在的话，更新缓存，且要将它变成最近使用的cache，添加到LinkedHashMap的末尾
+        if(map.containsKey(key)){
+            map.put(key, value);
+            makeRecently(key);
+            return;
+        }
+        //如果容量不够了，要删除最久没有使用过的cache，也就是链表最前部的cache
+        if(cap <= map.size()){
+            int oldestKey = map.keySet().iterator().next();
+            map.remove(oldestKey);
+        }
+        //将要put的的cache加入链表尾部
+        map.put(key, value);
+    }
+    public void makeRecently(int key){
+        int value = map.get(key);
+        map.remove(key);
+        map.put(key, value);
+    }
+}
