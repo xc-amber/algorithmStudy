@@ -75,7 +75,6 @@ public class Solution300 {
     public int lengthOfLIS(int[] nums) {
         int len = nums.length;
         int[] tails = new int[len];
-        tails[0] = Integer.MAX_VALUE;
         int res = 0;
         for (int num : nums) {
             int left = 0;
