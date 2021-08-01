@@ -2,7 +2,6 @@ import java.util.*;
 
 public class Solution1337 {
     public int[] kWeakestRows(int[][] mat, int k) {
-        int row = mat.length;
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < mat.length; i++) {
             map.put(i, getSum(mat[i]));
